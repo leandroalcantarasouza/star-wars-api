@@ -11,7 +11,7 @@
 	<groupId>br.com.leandro</groupId>
 	<artifactId>star-wars-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>star-wars-api</name>
+	<nome>star-wars-api</nome>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -30,6 +30,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.3</version>
 		</dependency>
 
 		<dependency>

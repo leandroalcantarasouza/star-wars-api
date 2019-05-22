@@ -1,0 +1,27 @@
+server:
+  servlet:
+    context-path: /star-wars/api
+
+spring:
+  profiles:
+    active: localhost
+
+---
+
+spring:
+  profiles: localhost
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: star-wars
+
+---
+
+spring:
+  profiles: cloud
+  data:
+    mongodb:
+      host: ${MONGO_URI}
+      port: ${MONGO_PORT}
+      database: todo-backend

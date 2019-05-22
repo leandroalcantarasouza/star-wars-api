@@ -1,0 +1,27 @@
+package br.com.leandro.starwarsapi.domain;
+
+import br.com.leandro.starwarsapi.dto.PlanetDto;
+import br.com.leandro.starwarsapi.dto.PlanetPayloadDto;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SaveDtoMapper {
+
+    public Planeta from(PlanetPayloadDto planetPayloadDto) {
+        Planeta planeta = new Planeta();
+        planeta.setClima(planetPayloadDto.getClima());
+        planeta.setNome(planetPayloadDto.getNome());
+        planeta.setTerreno(planetPayloadDto.getTerreno());
+        return planeta;
+    }
+
+    public PlanetDto from(Planeta planeta) {
+        PlanetDto planetDto = new PlanetDto();
+        planetDto.setId(planeta.getId());
+        planetDto.setClima(planeta.getClima());
+        planetDto.setNome(planeta.getNome());
+        planetDto.setTerreno(planeta.getTerreno());
+        return planetDto;
+    }
+
+}
