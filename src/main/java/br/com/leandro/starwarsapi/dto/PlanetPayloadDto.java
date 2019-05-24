@@ -5,7 +5,8 @@ import java.util.Objects;
 
 public class PlanetPayloadDto implements Serializable {
 
-    private static final long serialVersionUID = 7452454886742962716L;
+    private static final long serialVersionUID = 6166296831171526987L;
+
     private String terreno;
     private String clima;
     private String nome;

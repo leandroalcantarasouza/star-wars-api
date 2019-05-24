@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class PlanetDto implements Serializable {
 
-    private static final long serialVersionUID = -831032499570405024L;
+    private static final long serialVersionUID = -3685957858135156541L;
 
     private String id;
     private String terreno;

@@ -1,6 +1,8 @@
 package br.com.leandro.starwarsapi.controller.handler;
 
 import br.com.leandro.starwarsapi.exception.BusinessException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.time.Instant;
 import java.util.*;
 
 @ControllerAdvice
@@ -26,10 +29,12 @@ public class DefaultExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultExceptionHandler.class);
+
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public @ResponseBody Map<String, Object> handleConstraintViolationException(ConstraintViolationException ex) {
-
+        LOGGER.error("handleConstraintViolationException -" , ex);
         Map<String, Object> map = new HashMap<>();
         map.put(ERROR, resolveMessage(VALIDATION_FAILURE));
         map.put(VIOLATIONS, convertConstraintViolationsInRestFieldMessage(ex.getConstraintViolations()));
@@ -37,10 +42,21 @@ public class DefaultExceptionHandler {
         return map;
     }
 
-    @ExceptionHandler(BusinessException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT)
-    public @ResponseBody Map<String, Object> handleBusinessException(BusinessException ex) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public @ResponseBody Map<String, Object> handleIllegalArgumentException(IllegalArgumentException ex) {
+        LOGGER.error("handleIllegalArgumentException -" , ex);
+        Map<String, Object> map = new HashMap<>();
+        map.put(ERROR, resolveMessage(VALIDATION_FAILURE));
+        map.put(VIOLATIONS, ex.getMessage());
 
+        return map;
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(value = HttpStatus.PRECONDITION_FAILED)
+    public @ResponseBody Map<String, Object> handleBusinessException(BusinessException ex) {
+        LOGGER.error("handleBusinessException -" , ex);
         Map<String, Object> map = new HashMap<>();
         map.put(ERROR, resolveMessage(VALIDATION_FAILURE));
 
@@ -67,8 +83,9 @@ public class DefaultExceptionHandler {
         Map<String, Object> map = new HashMap<>();
         String resolveMessage = resolveMessage(UNKNOWN_ERROR);
         map.put(ERROR, resolveMessage);
-        long timeInMillis = Calendar.getInstance().getTimeInMillis();
+        long timeInMillis = Instant.now().toEpochMilli();
         map.put(TICKET, timeInMillis);
+        LOGGER.error("handleUncaughtException - " + resolveMessage + "[Ticket: " + timeInMillis + "]", ex);
         return map;
     }
 

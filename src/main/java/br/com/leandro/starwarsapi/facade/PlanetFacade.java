@@ -4,10 +4,23 @@ import br.com.leandro.starwarsapi.JavaxValidator;
 import br.com.leandro.starwarsapi.domain.EditDtoMapper;
 import br.com.leandro.starwarsapi.domain.Planeta;
 import br.com.leandro.starwarsapi.domain.SaveDtoMapper;
+import br.com.leandro.starwarsapi.dto.BuscaPlanetaPayloadDto;
 import br.com.leandro.starwarsapi.dto.PlanetDto;
 import br.com.leandro.starwarsapi.dto.PlanetPayloadDto;
 import br.com.leandro.starwarsapi.service.PlanetService;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 @Component
 public class PlanetFacade {
@@ -48,4 +61,22 @@ public class PlanetFacade {
         return saveDtoMapper.from(planetaEditado);
     }
 
+    public Optional<PlanetDto> encontrarPorId(String idPlaneta) {
+        Optional<Planeta> planetaEncontado = planetService.encontrarPorId(idPlaneta);
+        return planetaEncontado.map(dto -> saveDtoMapper.from(dto));
+    }
+
+    public Slice<PlanetDto> buscarPlaneta(BuscaPlanetaPayloadDto buscaPlaneta) {
+        if(Objects.isNull(buscaPlaneta)) {
+            buscaPlaneta = new BuscaPlanetaPayloadDto();
+        } else {
+            planetService.validaNumeroPagina(buscaPlaneta);
+            planetService.validaQuantidadePorPagina(buscaPlaneta);
+        }
+        PageRequest pageRequest = PageRequest.of(buscaPlaneta.getNumeroPagina(), buscaPlaneta.getQuantidadePorPagina());
+        Long totalPlanetasPorFiltro = planetService.totalPlanetasPorFiltro(pageRequest, buscaPlaneta.getNome());
+        List<Planeta> planetasPorFiltro = planetService.planetasPorFiltro(pageRequest, buscaPlaneta.getNome());
+
+        return new PageImpl<>(saveDtoMapper.from(planetasPorFiltro), pageRequest, totalPlanetasPorFiltro);
+    }
 }

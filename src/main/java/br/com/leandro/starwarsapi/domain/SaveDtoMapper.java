@@ -4,6 +4,9 @@ import br.com.leandro.starwarsapi.dto.PlanetDto;
 import br.com.leandro.starwarsapi.dto.PlanetPayloadDto;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class SaveDtoMapper {
 
@@ -24,4 +27,7 @@ public class SaveDtoMapper {
         return planetDto;
     }
 
+    public List<PlanetDto> from(List<Planeta> planetasPorFiltro) {
+        return planetasPorFiltro.stream().map(this::from).collect(Collectors.toList());
+    }
 }
