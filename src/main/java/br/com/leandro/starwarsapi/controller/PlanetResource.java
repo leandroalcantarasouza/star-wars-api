@@ -5,10 +5,15 @@ import br.com.leandro.starwarsapi.dto.PlanetDto;
 import br.com.leandro.starwarsapi.dto.PlanetPayloadDto;
 import br.com.leandro.starwarsapi.facade.PlanetFacade;
 import org.springframework.data.domain.Slice;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
 
+import java.net.URI;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.*;
@@ -24,8 +29,17 @@ public class PlanetResource extends BaseVersionOneRestController {
 
     @PostMapping("/planetas")
     public ResponseEntity<PlanetDto> salvarPlaneta(@RequestBody PlanetPayloadDto planetPayloadDto) {
-        final PlanetDto planetDto = planetFacade.savePlanet(planetPayloadDto);
-        return new ResponseEntity<>(planetDto, HttpStatus.CREATED);
+        final PlanetDto planetDto = planetFacade.salvarPlaneta(planetPayloadDto);
+        UriComponents ucb =
+                ServletUriComponentsBuilder
+                        .fromCurrentContextPath()
+                        .path("/v1/planetas/{id}")
+                        .buildAndExpand(planetDto.getId());
+
+        URI uriLocation = ucb.toUri();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.LOCATION, uriLocation.toASCIIString());
+        return new ResponseEntity<>(planetDto, headers, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/planetas/{idPlaneta}")
@@ -35,7 +49,7 @@ public class PlanetResource extends BaseVersionOneRestController {
     }
 
     @PatchMapping("/planetas/{idPlaneta}")
-    public ResponseEntity<PlanetDto> excluirPlaneta(@RequestBody PlanetPayloadDto planetaPayloadDto,
+    public ResponseEntity<PlanetDto> editarPlaneta(@RequestBody PlanetPayloadDto planetaPayloadDto,
                                                     @PathVariable String idPlaneta) {
         PlanetDto planetDto = planetFacade.editarPlaneta(planetaPayloadDto, idPlaneta);
         return new ResponseEntity<>(planetDto, OK);

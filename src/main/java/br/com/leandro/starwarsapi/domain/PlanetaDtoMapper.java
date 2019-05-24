@@ -8,10 +8,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class SaveDtoMapper {
+public class PlanetaDtoMapper {
 
     public Planeta from(PlanetPayloadDto planetPayloadDto) {
         Planeta planeta = new Planeta();
+        planeta.setClima(planetPayloadDto.getClima());
+        planeta.setNome(planetPayloadDto.getNome());
+        planeta.setTerreno(planetPayloadDto.getTerreno());
+        return planeta;
+    }
+
+    public Planeta from(PlanetPayloadDto planetPayloadDto, Planeta planeta) {
         planeta.setClima(planetPayloadDto.getClima());
         planeta.setNome(planetPayloadDto.getNome());
         planeta.setTerreno(planetPayloadDto.getTerreno());
@@ -24,6 +31,7 @@ public class SaveDtoMapper {
         planetDto.setClima(planeta.getClima());
         planetDto.setNome(planeta.getNome());
         planetDto.setTerreno(planeta.getTerreno());
+        planetDto.setQuantidadeAparicaoFilmes(planeta.getQuantidadeAparicaoEmFilmes());
         return planetDto;
     }
 

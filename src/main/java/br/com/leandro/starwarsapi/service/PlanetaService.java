@@ -3,8 +3,7 @@ package br.com.leandro.starwarsapi.service;
 import br.com.leandro.starwarsapi.domain.Planeta;
 import br.com.leandro.starwarsapi.dto.BuscaPlanetaPayloadDto;
 import br.com.leandro.starwarsapi.exception.PlanetaExistenteException;
-import br.com.leandro.starwarsapi.exception.PlanetaNaoEncontradoException;
-import br.com.leandro.starwarsapi.repository.PlanetCrudRepository;
+import br.com.leandro.starwarsapi.repository.PlanetaCrudRepository;
 import br.com.leandro.starwarsapi.repository.PlanetRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -14,46 +13,31 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-public class PlanetService {
+public class PlanetaService {
 
-    private PlanetCrudRepository planetCrudRepository;
+    private PlanetaCrudRepository planetaCrudRepository;
     private PlanetRepository planetRepository;
 
-    public PlanetService(PlanetCrudRepository planetCrudRepository, PlanetRepository planetRepository) {
-        this.planetCrudRepository = planetCrudRepository;
+    public PlanetaService(PlanetaCrudRepository planetaCrudRepository,
+                          PlanetRepository planetRepository) {
+        this.planetaCrudRepository = planetaCrudRepository;
         this.planetRepository = planetRepository;
     }
 
-    public Planeta savePlanet(Planeta planeta) {
-        return planetCrudRepository.save(planeta);
-    }
-
-    public void validaPlanetaComNomeExistenteInsercao(Planeta planeta) {
-        if(planetRepository.encontraPlanetaPorNomeInclusao(planeta)) {
-            throw new PlanetaExistenteException();
-        }
+    public Planeta salvarPlaneta(Planeta planeta) {
+        return planetaCrudRepository.save(planeta);
     }
 
     public void excluirPlaneta(String idPlaneta) {
-        planetCrudRepository.deleteById(idPlaneta);
-    }
-
-    public Planeta descobrirPorId(String idPlaneta) {
-        return planetCrudRepository.findById(idPlaneta).orElseThrow(PlanetaNaoEncontradoException::new);
-    }
-
-    public Planeta editarPlaneta(Planeta planetaASerAtualizado) {
-        return planetCrudRepository.save(planetaASerAtualizado);
-    }
-
-    public void validaPlanetaComNomeExistenteEdicao(Planeta planetaASerAtualizado) {
-        if(planetRepository.encontraPlanetaPorNomeEdicao(planetaASerAtualizado)) {
-            throw new PlanetaExistenteException();
-        }
+        planetaCrudRepository.deleteById(idPlaneta);
     }
 
     public Optional<Planeta> encontrarPorId(String idPlaneta) {
-        return planetCrudRepository.findById(idPlaneta);
+        return planetaCrudRepository.findById(idPlaneta);
+    }
+
+    public Planeta editarPlaneta(Planeta planetaASerAtualizado) {
+        return planetaCrudRepository.save(planetaASerAtualizado);
     }
 
     public Long totalPlanetasPorFiltro(PageRequest pageRequest, String nome) {
@@ -63,6 +47,13 @@ public class PlanetService {
     public List<Planeta> planetasPorFiltro(PageRequest pageRequest, String nome) {
         return planetRepository.planetasPorFiltro(pageRequest, nome);
     }
+
+    public void validaPlanetaComNomeExistente(Planeta planeta, Boolean desconsiderarProprioPlaneta) {
+        if(planetRepository.encontraPlanetaPorNome(planeta, desconsiderarProprioPlaneta)) {
+            throw new PlanetaExistenteException();
+        }
+    }
+
 
     public void validaNumeroPagina(BuscaPlanetaPayloadDto buscaPlaneta) {
         if(Objects.nonNull(buscaPlaneta) &&

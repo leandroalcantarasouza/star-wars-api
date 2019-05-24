@@ -5,12 +5,14 @@ import java.util.Objects;
 
 public class PlanetDto implements Serializable {
 
-    private static final long serialVersionUID = -3685957858135156541L;
+
+    private static final long serialVersionUID = -7702703807743516298L;
 
     private String id;
     private String terreno;
     private String clima;
     private String nome;
+    private Long quantidadeAparicaoFilmes;
 
     public String getTerreno() {
         return terreno;
@@ -42,6 +44,14 @@ public class PlanetDto implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Long getQuantidadeAparicaoFilmes() {
+        return quantidadeAparicaoFilmes;
+    }
+
+    public void setQuantidadeAparicaoFilmes(Long quantidadeAparicaoFilmes) {
+        this.quantidadeAparicaoFilmes = quantidadeAparicaoFilmes;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package br.com.leandro.starwarsapi.controller.handler;
 
 import br.com.leandro.starwarsapi.exception.BusinessException;
+import br.com.leandro.starwarsapi.exception.SwapiApiForaDoArException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,10 +85,22 @@ public class DefaultExceptionHandler {
         String resolveMessage = resolveMessage(UNKNOWN_ERROR);
         map.put(ERROR, resolveMessage);
         long timeInMillis = Instant.now().toEpochMilli();
-        map.put(TICKET, timeInMillis);
+        map.put(VIOLATIONS, timeInMillis);
         LOGGER.error("handleUncaughtException - " + resolveMessage + "[Ticket: " + timeInMillis + "]", ex);
         return map;
     }
+
+    @ExceptionHandler(SwapiApiForaDoArException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public @ResponseBody Map<String, Object> handleSwapiForaDoArException(SwapiApiForaDoArException ex) {
+        Map<String, Object> map = new HashMap<>();
+        List<String> violations = new ArrayList<>();
+        violations.add(resolveMessage(ex.getMessageCode()));
+        map.put(VIOLATIONS, violations);
+        LOGGER.error("handleSwapiForaDoArException", ex);
+        return map;
+    }
+
 
     private String resolveMessage(String code, Object... args) {
         return messageSource.getMessage(code, args, new Locale("pt", "BR"));

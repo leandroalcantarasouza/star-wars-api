@@ -20,9 +20,12 @@ public class PlanetRepository {
         this.mongoTemplate = mongoTemplate;
     }
 
-    public Boolean encontraPlanetaPorNomeInclusao(Planeta planeta) {
+    public Boolean encontraPlanetaPorNome(Planeta planeta, Boolean desconsiderarProprioPlaneta) {
         Query query = new Query();
         query.addCriteria(Criteria.where("nome").regex("^"+planeta.getNome()+"$","i"));
+        if(desconsiderarProprioPlaneta) {
+            query.addCriteria(Criteria.where("id").ne(planeta.getId()));
+        }
         Long retorno = mongoTemplate.count(query, Planeta.class);
         return retorno != 0L;
     }

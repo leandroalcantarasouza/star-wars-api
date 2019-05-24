@@ -6,6 +6,9 @@ spring:
   profiles:
     active: localhost
 
+swapi:
+  api:
+    uri: swapi.co/api
 ---
 
 spring:
