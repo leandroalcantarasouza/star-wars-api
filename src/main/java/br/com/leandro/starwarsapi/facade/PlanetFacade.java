@@ -1,6 +1,6 @@
 package br.com.leandro.starwarsapi.facade;
 
-import br.com.leandro.starwarsapi.JavaxValidator;
+import br.com.leandro.starwarsapi.validator.JavaxValidator;
 import br.com.leandro.starwarsapi.adapter.SwapiApiAdapter;
 import br.com.leandro.starwarsapi.domain.Planeta;
 import br.com.leandro.starwarsapi.domain.PlanetaDtoMapper;

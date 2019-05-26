@@ -16,9 +16,9 @@ public class TotalPlanetasPorFiltroTest extends MongoTestBase {
 
     @Before
     public void setup() {
-        planetaCrudRepository.save(PlanetaObjectMother.planetaBatata());
-        planetaCrudRepository.save(PlanetaObjectMother.planetaBatata2());
-        planetaCrudRepository.save(PlanetaObjectMother.planetaBatata3());
+        planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata());
+        planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata2());
+        planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata3());
     }
 
     @Test

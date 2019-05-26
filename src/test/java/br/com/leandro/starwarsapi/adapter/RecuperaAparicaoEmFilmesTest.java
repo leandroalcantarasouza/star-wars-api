@@ -52,7 +52,7 @@ public class RecuperaAparicaoEmFilmesTest {
     @Test
     public void deveChamarApiSwapiComPlanetaContendoFilme() throws URISyntaxException, JsonProcessingException {
 
-        Planeta planeta = PlanetaObjectMother.planetaBatata();
+        Planeta planeta = PlanetaObjectMother.planetaSalvoBatata();
         planetaSwapiResponseMock = PlanetaSwapiResponseObjectMother.planetaBatataSwapiComDoisFilmes();
 
         mockServer.expect(ExpectedCount.once(),
@@ -71,7 +71,7 @@ public class RecuperaAparicaoEmFilmesTest {
     @Test
     public void deveChamarApiSwapiComPlanetaNaoContendoFilme() throws URISyntaxException, JsonProcessingException {
 
-        Planeta planeta = PlanetaObjectMother.planetaBatata();
+        Planeta planeta = PlanetaObjectMother.planetaSalvoBatata();
         planetaSwapiResponseMock = PlanetaSwapiResponseObjectMother.planetaBatataComNenhumFilme();
 
         mockServer.expect(ExpectedCount.once(),
@@ -89,7 +89,7 @@ public class RecuperaAparicaoEmFilmesTest {
 
     @Test
     public void deveChamarApiSwapiComPlanetaNaoEncontrado() throws URISyntaxException, JsonProcessingException {
-        Planeta planeta = PlanetaObjectMother.planetaBatata();
+        Planeta planeta = PlanetaObjectMother.planetaSalvoBatata();
         planetaSwapiResponseMock = PlanetaSwapiResponseObjectMother.planetaNaoEncontrado();
 
         mockServer.expect(ExpectedCount.once(),
@@ -107,7 +107,7 @@ public class RecuperaAparicaoEmFilmesTest {
 
     @Test(expected = SwapiApiForaDoArException.class)
     public void deveJogarExcecaoChamadaSwapiComErro() throws URISyntaxException, JsonProcessingException {
-        Planeta planeta = PlanetaObjectMother.planetaBatata();
+        Planeta planeta = PlanetaObjectMother.planetaSalvoBatata();
         planetaSwapiResponseMock = PlanetaSwapiResponseObjectMother.planetaNaoEncontrado();
 
         mockServer.expect(ExpectedCount.once(),

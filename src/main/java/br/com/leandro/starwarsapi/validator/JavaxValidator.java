@@ -1,4 +1,4 @@
-package br.com.leandro.starwarsapi;
+package br.com.leandro.starwarsapi.validator;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Component;

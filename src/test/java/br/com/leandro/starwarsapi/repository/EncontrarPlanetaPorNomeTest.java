@@ -19,7 +19,7 @@ public class EncontrarPlanetaPorNomeTest extends MongoTestBase {
 
     @Before
     public void setup() {
-        planetaSalvo = planetaCrudRepository.save(PlanetaObjectMother.planetaBatata());
+        planetaSalvo = planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata());
     }
 
     @Test

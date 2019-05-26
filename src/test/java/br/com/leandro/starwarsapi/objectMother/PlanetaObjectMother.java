@@ -4,7 +4,7 @@ import br.com.leandro.starwarsapi.domain.Planeta;
 
 public class PlanetaObjectMother {
 
-    public static Planeta planetaBatata() {
+    public static Planeta planetaSalvoBatata() {
         Planeta planeta = new Planeta();
         planeta.setQuantidadeAparicaoEmFilmes(0L);
         planeta.setNome("batata");
@@ -14,7 +14,7 @@ public class PlanetaObjectMother {
         return planeta;
     }
 
-    public static Planeta planetaBatata2() {
+    public static Planeta planetaSalvoBatata2() {
         Planeta planeta = new Planeta();
         planeta.setQuantidadeAparicaoEmFilmes(0L);
         planeta.setNome("batata2");
@@ -24,11 +24,20 @@ public class PlanetaObjectMother {
         return planeta;
     }
 
-    public static Planeta planetaBatata3() {
+    public static Planeta planetaSalvoBatata3() {
         Planeta planeta = new Planeta();
         planeta.setQuantidadeAparicaoEmFilmes(0L);
         planeta.setNome("batata3");
         planeta.setId("5ce77035cb20895c33fcd331");
+        planeta.setClima("frio");
+        planeta.setTerreno("montanhoso");
+        return planeta;
+    }
+
+    public static Planeta planetaASalvarBatata() {
+        Planeta planeta = new Planeta();
+        planeta.setQuantidadeAparicaoEmFilmes(0L);
+        planeta.setNome("batata");
         planeta.setClima("frio");
         planeta.setTerreno("montanhoso");
         return planeta;

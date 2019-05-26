@@ -24,9 +24,9 @@ public class PlanetasPorFiltroTest extends MongoTestBase {
 
     @Before
     public void setup() {
-        planetaBatataUm = planetaCrudRepository.save(PlanetaObjectMother.planetaBatata());
-        planetaBatataDois = planetaCrudRepository.save(PlanetaObjectMother.planetaBatata2());
-        planetaBatataTres = planetaCrudRepository.save(PlanetaObjectMother.planetaBatata3());
+        planetaBatataUm = planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata());
+        planetaBatataDois = planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata2());
+        planetaBatataTres = planetaCrudRepository.save(PlanetaObjectMother.planetaSalvoBatata3());
     }
 
     @Test

@@ -57,17 +57,24 @@ public class PlanetaService {
 
     public void validaNumeroPagina(BuscaPlanetaPayloadDto buscaPlaneta) {
         if(Objects.nonNull(buscaPlaneta) &&
-                Objects.nonNull(buscaPlaneta.getNumeroPagina()) &&
-                buscaPlaneta.getNumeroPagina() < 0) {
-            throw new IllegalArgumentException("Número de página não pode ser menor que 0");
+                Objects.nonNull(buscaPlaneta.getNumeroPagina())) {
+            if(buscaPlaneta.getNumeroPagina() < 0) {
+                throw new IllegalArgumentException("Número de página não pode ser menor que 0");
+            }
+        } else {
+           throw new IllegalArgumentException("Número de página não pode ser nulo");
         }
     }
 
     public void validaQuantidadePorPagina(BuscaPlanetaPayloadDto buscaPlaneta) {
         if(Objects.nonNull(buscaPlaneta) &&
-                Objects.nonNull(buscaPlaneta.getQuantidadePorPagina()) &&
-                buscaPlaneta.getQuantidadePorPagina() < 1) {
-            throw new IllegalArgumentException("Quantiade de elementos por página não pode ser menor que 1");
+                Objects.nonNull(buscaPlaneta.getQuantidadePorPagina())) {
+            if(buscaPlaneta.getQuantidadePorPagina() < 1) {
+                throw new IllegalArgumentException("Quantidade de elementos por página não pode ser menor que 1");
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Quantidade de elementos por página não pode ser nulo");
         }
     }
 }
