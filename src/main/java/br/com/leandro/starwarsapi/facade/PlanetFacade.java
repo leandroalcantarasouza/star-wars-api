@@ -5,8 +5,8 @@ import br.com.leandro.starwarsapi.adapter.SwapiApiAdapter;
 import br.com.leandro.starwarsapi.domain.Planeta;
 import br.com.leandro.starwarsapi.domain.PlanetaDtoMapper;
 import br.com.leandro.starwarsapi.dto.BuscaPlanetaPayloadDto;
-import br.com.leandro.starwarsapi.dto.PlanetDto;
-import br.com.leandro.starwarsapi.dto.PlanetPayloadDto;
+import br.com.leandro.starwarsapi.dto.PlanetaDto;
+import br.com.leandro.starwarsapi.dto.PlanetaPayloadDto;
 import br.com.leandro.starwarsapi.exception.PlanetaNaoEncontradoException;
 import br.com.leandro.starwarsapi.service.PlanetaService;
 import org.springframework.data.domain.PageImpl;
@@ -36,8 +36,8 @@ public class PlanetFacade {
         this.swapiApiAdapter = swapiApiAdapter;
     }
 
-    public PlanetDto salvarPlaneta(PlanetPayloadDto planetPayloadDto) {
-        Planeta planetaToBeSaved = planetaDtoMapper.from(planetPayloadDto);
+    public PlanetaDto salvarPlaneta(PlanetaPayloadDto planetaPayloadDto) {
+        Planeta planetaToBeSaved = planetaDtoMapper.from(planetaPayloadDto);
         planetJavaxValidator.validate(planetaToBeSaved);
         planetaService.validaPlanetaComNomeExistente(planetaToBeSaved, false);
         Long quantidadeAparicaoFilmes = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planetaToBeSaved);
@@ -50,7 +50,7 @@ public class PlanetFacade {
         planetaService.excluirPlaneta(idPlaneta);
     }
 
-    public PlanetDto editarPlaneta(PlanetPayloadDto planetaPayloadDto, String idPlaneta) {
+    public PlanetaDto editarPlaneta(PlanetaPayloadDto planetaPayloadDto, String idPlaneta) {
         Planeta planeta = planetaService.encontrarPorId(idPlaneta).orElseThrow(PlanetaNaoEncontradoException::new);
         Planeta planetaASerAtualizado = planetaDtoMapper.from(planetaPayloadDto, planeta);
         planetJavaxValidator.validate(planetaASerAtualizado);
@@ -61,12 +61,12 @@ public class PlanetFacade {
         return planetaDtoMapper.from(planetaEditado);
     }
 
-    public Optional<PlanetDto> encontrarPorId(String idPlaneta) {
+    public Optional<PlanetaDto> encontrarPorId(String idPlaneta) {
         Optional<Planeta> planetaEncontado = planetaService.encontrarPorId(idPlaneta);
         return planetaEncontado.map(dto -> planetaDtoMapper.from(dto));
     }
 
-    public Slice<PlanetDto> buscarPlaneta(BuscaPlanetaPayloadDto buscaPlaneta) {
+    public Slice<PlanetaDto> buscarPlaneta(BuscaPlanetaPayloadDto buscaPlaneta) {
         if(Objects.isNull(buscaPlaneta)) {
             buscaPlaneta = new BuscaPlanetaPayloadDto();
         } else {

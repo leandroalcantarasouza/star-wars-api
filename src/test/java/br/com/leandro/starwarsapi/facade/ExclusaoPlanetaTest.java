@@ -25,5 +25,4 @@ public class ExclusaoPlanetaTest {
     @InjectMocks
     private PlanetFacade planetFacade;
 
-
 }

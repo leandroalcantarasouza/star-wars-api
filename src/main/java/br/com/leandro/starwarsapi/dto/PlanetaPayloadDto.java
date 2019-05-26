@@ -3,7 +3,7 @@ package br.com.leandro.starwarsapi.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PlanetPayloadDto implements Serializable {
+public class PlanetaPayloadDto implements Serializable {
 
     private static final long serialVersionUID = 6166296831171526987L;
 
@@ -39,7 +39,7 @@ public class PlanetPayloadDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PlanetPayloadDto that = (PlanetPayloadDto) o;
+        PlanetaPayloadDto that = (PlanetaPayloadDto) o;
         return Objects.equals(getTerreno(), that.getTerreno()) &&
                 Objects.equals(getClima(), that.getClima()) &&
                 Objects.equals(getNome(), that.getNome());
