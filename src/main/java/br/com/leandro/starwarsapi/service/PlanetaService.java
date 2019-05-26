@@ -40,8 +40,8 @@ public class PlanetaService {
         return planetaCrudRepository.save(planetaASerAtualizado);
     }
 
-    public Long totalPlanetasPorFiltro(PageRequest pageRequest, String nome) {
-        return planetRepository.totalPlanetasPorFiltro(pageRequest, nome);
+    public Long totalPlanetasPorFiltro(String nome) {
+        return planetRepository.totalPlanetasPorFiltro(nome);
     }
 
     public List<Planeta> planetasPorFiltro(PageRequest pageRequest, String nome) {

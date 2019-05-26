@@ -74,7 +74,7 @@ public class PlanetFacade {
             planetaService.validaQuantidadePorPagina(buscaPlaneta);
         }
         PageRequest pageRequest = PageRequest.of(buscaPlaneta.getNumeroPagina(), buscaPlaneta.getQuantidadePorPagina());
-        Long totalPlanetasPorFiltro = planetaService.totalPlanetasPorFiltro(pageRequest, buscaPlaneta.getNome());
+        Long totalPlanetasPorFiltro = planetaService.totalPlanetasPorFiltro(buscaPlaneta.getNome());
         List<Planeta> planetasPorFiltro = planetaService.planetasPorFiltro(pageRequest, buscaPlaneta.getNome());
 
         return new PageImpl<>(planetaDtoMapper.from(planetasPorFiltro), pageRequest, totalPlanetasPorFiltro);

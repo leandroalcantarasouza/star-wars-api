@@ -30,17 +30,8 @@ public class PlanetRepository {
         return retorno != 0L;
     }
 
-    public Boolean encontraPlanetaPorNomeEdicao(Planeta planetaASerAtualizado) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("nome").regex("^"+planetaASerAtualizado.getNome()+"$","i"));
-        query.addCriteria(Criteria.where("id").ne(planetaASerAtualizado.getId()));
-        Long retorno = mongoTemplate.count(query, Planeta.class);
-        return retorno != 0L;
-    }
-
-    public Long totalPlanetasPorFiltro(PageRequest pageRequest, String nome) {
+    public Long totalPlanetasPorFiltro(String nome) {
         Query query = filtroPadrao();
-        query.with(pageRequest);
         if(StringUtils.isNotBlank(nome)) {
             query.addCriteria(Criteria.where("nome").regex("^"+nome,"i"));
         }
@@ -48,7 +39,7 @@ public class PlanetRepository {
     }
 
     private Query filtroPadrao() {
-        return new Query().with(Sort.by(Sort.Direction.DESC,"_d"));
+        return new Query().with(Sort.by(Sort.Direction.ASC,"nome"));
     }
 
     public List<Planeta> planetasPorFiltro(PageRequest pageRequest, String nome) {

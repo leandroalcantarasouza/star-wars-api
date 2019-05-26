@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 @Document("planet")
 public class Planeta {
@@ -67,5 +68,18 @@ public class Planeta {
 
     public void setVersao(Long versao) {
         this.versao = versao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planeta planeta = (Planeta) o;
+        return Objects.equals(getId(), planeta.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
