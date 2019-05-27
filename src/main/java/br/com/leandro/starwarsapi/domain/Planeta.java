@@ -18,7 +18,7 @@ public class Planeta {
     private String clima;
     @NotBlank
     private String nome;
-    private Long quantidadeAparicaoEmFilmes;
+    private Integer quantidadeAparicaoEmFilmes;
     @Version
     private Long versao;
 
@@ -54,11 +54,11 @@ public class Planeta {
         this.id = id;
     }
 
-    public Long getQuantidadeAparicaoEmFilmes() {
+    public Integer getQuantidadeAparicaoEmFilmes() {
         return quantidadeAparicaoEmFilmes;
     }
 
-    public void setQuantidadeAparicaoEmFilmes(Long quantidadeAparicaoEmFilmes) {
+    public void setQuantidadeAparicaoEmFilmes(Integer quantidadeAparicaoEmFilmes) {
         this.quantidadeAparicaoEmFilmes = quantidadeAparicaoEmFilmes;
     }
 

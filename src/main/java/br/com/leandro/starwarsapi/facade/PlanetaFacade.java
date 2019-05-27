@@ -41,7 +41,7 @@ public class PlanetaFacade {
         Planeta planetaToBeSaved = planetaDtoMapper.from(planetaPayloadDto);
         planetJavaxValidator.validate(planetaToBeSaved);
         planetaService.validaPlanetaComNomeExistente(planetaToBeSaved, false);
-        Long quantidadeAparicaoFilmes = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planetaToBeSaved);
+        Integer quantidadeAparicaoFilmes = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planetaToBeSaved);
         planetaToBeSaved.setQuantidadeAparicaoEmFilmes(quantidadeAparicaoFilmes);
         Planeta savedPlaneta = planetaService.salvarPlaneta(planetaToBeSaved);
         return planetaDtoMapper.from(savedPlaneta);
@@ -56,7 +56,7 @@ public class PlanetaFacade {
         Planeta planetaASerAtualizado = planetaDtoMapper.from(planetaPayloadDto, planeta);
         planetJavaxValidator.validate(planetaASerAtualizado);
         planetaService.validaPlanetaComNomeExistente(planetaASerAtualizado, true);
-        Long quantidadeAparicaoFilmes = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planetaASerAtualizado);
+        Integer quantidadeAparicaoFilmes = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planetaASerAtualizado);
         planetaASerAtualizado.setQuantidadeAparicaoEmFilmes(quantidadeAparicaoFilmes);
         Planeta planetaEditado = planetaService.editarPlaneta(planetaASerAtualizado);
         return planetaDtoMapper.from(planetaEditado);

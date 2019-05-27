@@ -35,12 +35,12 @@ public class SwapiApiAdapter {
         this.restTemplate = restTemplate;
     }
 
-    public Long recuperaAparicaoEmFilmesDe(Planeta planeta) {
+    public Integer recuperaAparicaoEmFilmesDe(Planeta planeta) {
 
         Objects.requireNonNull(planeta);
         Objects.requireNonNull(planeta.getNome());
 
-        Long quantidadeAparicao = 0L;
+        Integer quantidadeAparicao = 0;
 
         String endpoint = UriComponentsBuilder.newInstance()
                 .scheme("https")
@@ -55,7 +55,7 @@ public class SwapiApiAdapter {
             PlanetaSwapiResponse planetaSwapiResponse = response.getBody();
             if(response.getStatusCode().is2xxSuccessful() && CollectionUtils.isNotEmpty(Objects.requireNonNull(planetaSwapiResponse).getResults())) {
                 Optional<Response> results = planetaSwapiResponse.getResults().stream().findFirst();
-                quantidadeAparicao = results.map(responseDto -> responseDto.films.stream().count()).get();
+                quantidadeAparicao = Math.toIntExact(results.map(responseDto -> responseDto.films.stream().count()).get());
             }
         } catch(HttpClientErrorException | HttpServerErrorException | UnknownHttpStatusCodeException exception) {
             LOGGER.error("Erro ao chamar a api do swapi", exception);

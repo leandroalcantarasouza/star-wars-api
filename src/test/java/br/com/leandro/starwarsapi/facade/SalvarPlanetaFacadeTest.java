@@ -48,7 +48,7 @@ public class SalvarPlanetaFacadeTest {
                 planetaService,
                 planetaDtoMapper);
 
-        Long quantidadeFilmes = 5L;
+        Integer quantidadeFilmes = 5;
 
         PlanetaPayloadDto planetaPayloadDto = PlanetaPayloadDtoObjectMother.comTodosOsCamposPreenchidos();
         Planeta planetaASalvar = PlanetaObjectMother.planetaASalvarBatata();
@@ -61,7 +61,7 @@ public class SalvarPlanetaFacadeTest {
         planetaComFilmes.setNome(planetaASalvar.getNome());
         planetaComFilmes.setClima(planetaASalvar.getClima());
         planetaComFilmes.setTerreno(planetaASalvar.getTerreno());
-        planetaComFilmes.setQuantidadeAparicaoEmFilmes(5L);
+        planetaComFilmes.setQuantidadeAparicaoEmFilmes(5);
 
         Planeta planetaSalvo = PlanetaObjectMother.planetaSalvoBatata();
         given(planetaService.salvarPlaneta(planetaComFilmes)).willReturn(planetaSalvo);

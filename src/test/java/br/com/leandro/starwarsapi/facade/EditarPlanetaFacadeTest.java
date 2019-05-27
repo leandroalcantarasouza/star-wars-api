@@ -57,7 +57,7 @@ public class EditarPlanetaFacadeTest {
                 planetaService,
                 planetaDtoMapper);
 
-        Long quantidadeFilmes = 5L;
+        Integer quantidadeFilmes = 5;
         String planetaId = "5ce77035cb20895c33fcd331";
         PlanetaPayloadDto planetaPayloadDto = PlanetaPayloadDtoObjectMother.comTodosOsCamposPreenchidosEdicao();
 
@@ -73,7 +73,7 @@ public class EditarPlanetaFacadeTest {
         planetaComFilmes.setId(planetaAEditar.getId());
         planetaComFilmes.setClima(planetaAEditar.getClima());
         planetaComFilmes.setTerreno(planetaAEditar.getTerreno());
-        planetaComFilmes.setQuantidadeAparicaoEmFilmes(5L);
+        planetaComFilmes.setQuantidadeAparicaoEmFilmes(5);
 
         Planeta planetaEditado = PlanetaObjectMother.planetaSalvoBatata();
         given(planetaService.editarPlaneta(planetaComFilmes)).willReturn(planetaEditado);

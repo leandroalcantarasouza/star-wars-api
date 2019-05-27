@@ -42,17 +42,17 @@ public class PlanetaResource extends BaseVersionOneRestController {
         return new ResponseEntity<>(planetaDto, headers, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/planetas/{idPlaneta}")
-    public ResponseEntity<PlanetaDto> excluirPlaneta(@PathVariable String idPlaneta) {
-        planetaFacade.excluirPlaneta(idPlaneta);
-        return new ResponseEntity<>(OK);
-    }
-
     @PatchMapping("/planetas/{idPlaneta}")
     public ResponseEntity<PlanetaDto> editarPlaneta(@RequestBody PlanetaPayloadDto planetaPayloadDto,
                                                     @PathVariable String idPlaneta) {
         PlanetaDto planetaDto = planetaFacade.editarPlaneta(planetaPayloadDto, idPlaneta);
         return new ResponseEntity<>(planetaDto, OK);
+    }
+
+    @DeleteMapping("/planetas/{idPlaneta}")
+    public ResponseEntity<PlanetaDto> excluirPlaneta(@PathVariable String idPlaneta) {
+        planetaFacade.excluirPlaneta(idPlaneta);
+        return new ResponseEntity<>(OK);
     }
 
     @GetMapping("/planetas/{idPlaneta}")
@@ -62,9 +62,9 @@ public class PlanetaResource extends BaseVersionOneRestController {
     }
 
     @GetMapping("/planetas")
-    public ResponseEntity<Slice<PlanetaDto>> encontrarPorNome(BuscaPlanetaPayloadDto buscaPlaneta) {
+    public ResponseEntity<Page<PlanetaDto>> encontrarPorNome(BuscaPlanetaPayloadDto buscaPlaneta) {
         Page<PlanetaDto> paginaPlanetasEncontrados = planetaFacade.buscarPlaneta(buscaPlaneta);
-        ResponseEntity<Slice<PlanetaDto>> respostaHttp;
+        ResponseEntity<Page<PlanetaDto>> respostaHttp;
         if(paginaPlanetasEncontrados.hasContent()) {
             respostaHttp = new ResponseEntity<>(paginaPlanetasEncontrados, OK);
         } else {

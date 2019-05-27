@@ -63,7 +63,7 @@ public class RecuperaAparicaoEmFilmesTest {
                         .body(mapper.writeValueAsString(planetaSwapiResponseMock))
                 );
 
-        Long resultado = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planeta);
+        Integer resultado = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planeta);
         mockServer.verify();
         assertThat(resultado).isEqualTo(2);
     }
@@ -82,7 +82,7 @@ public class RecuperaAparicaoEmFilmesTest {
                         .body(mapper.writeValueAsString(planetaSwapiResponseMock))
                 );
 
-        Long resultado = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planeta);
+        Integer resultado = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planeta);
         mockServer.verify();
         assertThat(resultado).isEqualTo(0);
     }
@@ -100,7 +100,7 @@ public class RecuperaAparicaoEmFilmesTest {
                         .body(mapper.writeValueAsString(planetaSwapiResponseMock))
                 );
 
-        Long resultado = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planeta);
+        Integer resultado = swapiApiAdapter.recuperaAparicaoEmFilmesDe(planeta);
         mockServer.verify();
         assertThat(resultado).isEqualTo(0);
     }
