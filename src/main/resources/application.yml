@@ -4,7 +4,7 @@ server:
 
 spring:
   profiles:
-    active: localhost
+    active: ${APP_PROFILE:localhost}
 
 swapi:
   api:

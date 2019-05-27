@@ -84,6 +84,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>star-wars-api</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
