@@ -7,14 +7,14 @@
   A seguir são apresentados os endpoints criados para permitir a utilização da api.
   Todos os endpoints requisitam cabecalho `Content-Type` com o valor `application/json`.
   
-  1. [Como Rodar](#como rodar) 
-  1. [Tratamento de Erros](#tratamento de erros)
-  1. [Criação de Planetas](#Criação de Planetas)
-  1. [Atualização de Planetas](#Atualização de Planetas)
-  1. [Exclusão de Planeta por ID](#Exclusão de Planeta por ID)
-  1. [Encontrar Planeta por ID](#Encontrar Planeta por ID)
-  1. [Listar Todos os Planetas](#Listar Todos os Planetas)
-  1. [Encontrar Planeta Por Nome](#Encontrar Planeta Por Nome)
+  1. Como Rodar
+  1. Tratamento de Erros
+  1. Criação de Planetas
+  1. Atualização de Planetas
+  1. Exclusão de Planeta por ID
+  1. Encontrar Planeta por ID
+  1. Listar Todos os Planetas
+  1. Encontrar Planeta Por Nome
 
   
 # Como Rodar
@@ -29,8 +29,6 @@ Pode-se executar o arquivo docker-compose.yml para poder executar ambos os servi
 Para executar deve-se ter instalado o docker-compose e executar o comando docker-compose up na raiz do projeto.\
 A aplicação é acessível pela url http://host:8080/star-wars/api, onde host é igual a localhost no modo localhost, ou o endereço de execução do ambiente do docker no modo cloud.\
 Na url base (http://host:8080/star-wars/api), encontra-se configurado um ambiente de execução do swagger, o qual poderá ser usado para se interagir com a api.
-
-**[⬆ voltar ao topo](#star wars api)**
 
 # Tratamento De Erros
 
@@ -76,8 +74,6 @@ O retorno do código 500, vem acompanhado com um ticket, o qual pode ser utiliza
 }
 ```
 
-**[⬆ voltar ao topo](#star wars api)**
-
 # Criação de Planetas
 
 A criação de planetas se dá através do endpoint `http://host:8080/star-wars/api/v1/planetas`, com o método http `POST`.
@@ -116,8 +112,6 @@ location: http://localhost:8080/star-wars/api/v1/planetas/5ceb6a92a7b11b0007e1d4
 transfer-encoding: chunked 
 ```
 
-**[⬆ voltar ao topo](#star wars api)**
-
 # Atualização de Planetas
 
 A atualização de planetas se dá através do endpoint `http://host:8080/star-wars/api/v1/planetas/identificadorDoPlaneta`, com o método http `PATCH`.
@@ -155,8 +149,6 @@ content-type: application/json;charset=UTF-8
  transfer-encoding: chunked 
 ```
 
-**[⬆ voltar ao topo](#star wars api)**
-
 # Exclusão de Planeta por ID
 
 A exclusão de planetas se dá através do endpoint `http://host:8080/star-wars/api/v1/planetas/identificadorDoPlaneta`, com o método http `DELETE`.
@@ -172,8 +164,6 @@ Resposta
 content-length: 0 
 date: Mon, 27 May 2019 04:47:55 GMT 
 ```
-
-**[⬆ voltar ao topo](#star wars api)**
 
 # Encontrar Planeta por ID
 
@@ -202,8 +192,6 @@ content-type: application/json;charset=UTF-8
 date: Mon, 27 May 2019 04:52:07 GMT 
 transfer-encoding: chunked 
 ```
-
-**[⬆ voltar ao topo](#star wars api)**
 
 # Listar Todos os Planetas
 
@@ -284,7 +272,6 @@ content-type: application/json;charset=UTF-8
 date: Mon, 27 May 2019 05:03:36 GMT 
 transfer-encoding: chunked 
 ```
-**[⬆ voltar ao topo](#star wars api)**
 
 # Encontrar Planeta Por Nome
 
