@@ -25,7 +25,7 @@ public class EditarPlanetaServiceTest {
 
     @Test
     public void deveChamarPlanetaCrudRepository() {
-        Planeta planetaASerEditado = PlanetaObjectMother.planetaASalvarBatata();
+        Planeta planetaASerEditado = PlanetaObjectMother.planetaAEditarBatata();
         given(planetaCrudRepositoryMock.save(planetaASerEditado)).willReturn(planetaASerEditado);
         Planeta planetaResponse = planetaService.editarPlaneta(planetaASerEditado);
         assertThat(planetaResponse).isEqualTo(planetaASerEditado);

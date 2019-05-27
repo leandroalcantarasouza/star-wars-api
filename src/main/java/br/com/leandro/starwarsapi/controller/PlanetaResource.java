@@ -3,7 +3,8 @@ package br.com.leandro.starwarsapi.controller;
 import br.com.leandro.starwarsapi.dto.BuscaPlanetaPayloadDto;
 import br.com.leandro.starwarsapi.dto.PlanetaDto;
 import br.com.leandro.starwarsapi.dto.PlanetaPayloadDto;
-import br.com.leandro.starwarsapi.facade.PlanetFacade;
+import br.com.leandro.starwarsapi.facade.PlanetaFacade;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,17 +19,17 @@ import java.util.Optional;
 import static org.springframework.http.HttpStatus.*;
 
 @RestController
-public class PlanetResource extends BaseVersionOneRestController {
+public class PlanetaResource extends BaseVersionOneRestController {
 
-    private PlanetFacade planetFacade;
+    private PlanetaFacade planetaFacade;
 
-    public PlanetResource(PlanetFacade planetFacade) {
-        this.planetFacade = planetFacade;
+    public PlanetaResource(PlanetaFacade planetaFacade) {
+        this.planetaFacade = planetaFacade;
     }
 
     @PostMapping("/planetas")
     public ResponseEntity<PlanetaDto> salvarPlaneta(@RequestBody PlanetaPayloadDto planetaPayloadDto) {
-        final PlanetaDto planetaDto = planetFacade.salvarPlaneta(planetaPayloadDto);
+        final PlanetaDto planetaDto = planetaFacade.salvarPlaneta(planetaPayloadDto);
         UriComponents ucb =
                 ServletUriComponentsBuilder
                         .fromCurrentContextPath()
@@ -43,26 +44,26 @@ public class PlanetResource extends BaseVersionOneRestController {
 
     @DeleteMapping("/planetas/{idPlaneta}")
     public ResponseEntity<PlanetaDto> excluirPlaneta(@PathVariable String idPlaneta) {
-        planetFacade.excluirPlaneta(idPlaneta);
+        planetaFacade.excluirPlaneta(idPlaneta);
         return new ResponseEntity<>(OK);
     }
 
     @PatchMapping("/planetas/{idPlaneta}")
     public ResponseEntity<PlanetaDto> editarPlaneta(@RequestBody PlanetaPayloadDto planetaPayloadDto,
                                                     @PathVariable String idPlaneta) {
-        PlanetaDto planetaDto = planetFacade.editarPlaneta(planetaPayloadDto, idPlaneta);
+        PlanetaDto planetaDto = planetaFacade.editarPlaneta(planetaPayloadDto, idPlaneta);
         return new ResponseEntity<>(planetaDto, OK);
     }
 
     @GetMapping("/planetas/{idPlaneta}")
     public ResponseEntity<PlanetaDto> encontrarPorId(@PathVariable String idPlaneta) {
-        Optional<PlanetaDto> planetDto = planetFacade.encontrarPorId(idPlaneta);
+        Optional<PlanetaDto> planetDto = planetaFacade.encontrarPorId(idPlaneta);
         return planetDto.map(dto -> new ResponseEntity<>(dto, OK)).orElseGet(() -> new ResponseEntity<>(NOT_FOUND));
     }
 
     @GetMapping("/planetas")
     public ResponseEntity<Slice<PlanetaDto>> encontrarPorNome(BuscaPlanetaPayloadDto buscaPlaneta) {
-        Slice<PlanetaDto> paginaPlanetasEncontrados = planetFacade.buscarPlaneta(buscaPlaneta);
+        Page<PlanetaDto> paginaPlanetasEncontrados = planetaFacade.buscarPlaneta(buscaPlaneta);
         ResponseEntity<Slice<PlanetaDto>> respostaHttp;
         if(paginaPlanetasEncontrados.hasContent()) {
             respostaHttp = new ResponseEntity<>(paginaPlanetasEncontrados, OK);

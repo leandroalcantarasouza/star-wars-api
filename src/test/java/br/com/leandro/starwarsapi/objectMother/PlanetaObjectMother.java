@@ -37,9 +37,18 @@ public class PlanetaObjectMother {
         return planeta;
     }
 
+    public static Planeta planetaAEditarBatata() {
+        Planeta planeta = new Planeta();
+        planeta.setId("5ce77035cb20895c33fcd331");
+        planeta.setQuantidadeAparicaoEmFilmes(0L);
+        planeta.setNome("batata");
+        planeta.setClima("frio");
+        planeta.setTerreno("montanhoso");
+        return planeta;
+    }
+
     public static Planeta planetaASalvarBatata() {
         Planeta planeta = new Planeta();
-        planeta.setQuantidadeAparicaoEmFilmes(0L);
         planeta.setNome("batata");
         planeta.setClima("frio");
         planeta.setTerreno("montanhoso");

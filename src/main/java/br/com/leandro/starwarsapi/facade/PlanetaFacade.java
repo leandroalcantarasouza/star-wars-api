@@ -9,6 +9,7 @@ import br.com.leandro.starwarsapi.dto.PlanetaDto;
 import br.com.leandro.starwarsapi.dto.PlanetaPayloadDto;
 import br.com.leandro.starwarsapi.exception.PlanetaNaoEncontradoException;
 import br.com.leandro.starwarsapi.service.PlanetaService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
@@ -19,17 +20,17 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Component
-public class PlanetFacade {
+public class PlanetaFacade {
 
     private PlanetaDtoMapper planetaDtoMapper;
     private PlanetaService planetaService;
     private JavaxValidator<Planeta> planetJavaxValidator;
     private SwapiApiAdapter swapiApiAdapter;
 
-    public PlanetFacade(PlanetaDtoMapper planetaDtoMapper,
-                        PlanetaService planetaService,
-                        JavaxValidator<Planeta> planetJavaxValidator,
-                        SwapiApiAdapter swapiApiAdapter) {
+    public PlanetaFacade(PlanetaDtoMapper planetaDtoMapper,
+                         PlanetaService planetaService,
+                         JavaxValidator<Planeta> planetJavaxValidator,
+                         SwapiApiAdapter swapiApiAdapter) {
         this.planetaDtoMapper = planetaDtoMapper;
         this.planetaService = planetaService;
         this.planetJavaxValidator = planetJavaxValidator;
@@ -66,7 +67,7 @@ public class PlanetFacade {
         return planetaEncontado.map(dto -> planetaDtoMapper.from(dto));
     }
 
-    public Slice<PlanetaDto> buscarPlaneta(BuscaPlanetaPayloadDto buscaPlaneta) {
+    public Page<PlanetaDto> buscarPlaneta(BuscaPlanetaPayloadDto buscaPlaneta) {
         if(Objects.isNull(buscaPlaneta)) {
             buscaPlaneta = new BuscaPlanetaPayloadDto();
         } else {
