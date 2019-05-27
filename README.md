@@ -46,7 +46,7 @@ O retorno do código 400, também vem acompanhado de um objeto descrevendo as ca
   "violations": [
     {
       "field": "clima",
-      "message": "must not be blank",
+      "message": "não pode estar em branco",
       "rejectedValue": null
     }
   ],

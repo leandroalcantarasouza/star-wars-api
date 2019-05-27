@@ -12,6 +12,7 @@ services:
       - MONGO_URI=star-wars-api-mongo
       - MONGO_PORT=27017
       - APP_PROFILE=cloud
+      - JAVA_OPTIONS=-Duser.timezone=America/Sao_Paulo -Duser.language=pt -Duser.region=BR
     depends_on:
       - mongo
   mongo:
