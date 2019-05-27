@@ -9,6 +9,11 @@ spring:
 swapi:
   api:
     uri: swapi.co/api
+
+build:
+  version: @project.version@
+  date: @timestamp@
+
 ---
 
 spring:
@@ -27,4 +32,4 @@ spring:
     mongodb:
       host: ${MONGO_URI}
       port: ${MONGO_PORT}
-      database: todo-backend
+      database: star-wars

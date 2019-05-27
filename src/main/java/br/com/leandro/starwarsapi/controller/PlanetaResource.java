@@ -5,7 +5,6 @@ import br.com.leandro.starwarsapi.dto.PlanetaDto;
 import br.com.leandro.starwarsapi.dto.PlanetaPayloadDto;
 import br.com.leandro.starwarsapi.facade.PlanetaFacade;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
