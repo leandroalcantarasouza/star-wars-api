@@ -24,7 +24,6 @@ public class DefaultExceptionHandler {
     private static final String VIOLATIONS = "violations";
     private static final String TICKET = "ticket";
     private static final String UNKNOWN_ERROR = "UnknownError";
-    private static final String REQUEST_ERROR = "RequestError";
     private static final String VALIDATION_FAILURE = "ValidationFailure";
 
     @Autowired
@@ -85,7 +84,7 @@ public class DefaultExceptionHandler {
         String resolveMessage = resolveMessage(UNKNOWN_ERROR);
         map.put(ERROR, resolveMessage);
         long timeInMillis = Instant.now().toEpochMilli();
-        map.put(VIOLATIONS, timeInMillis);
+        map.put(TICKET, timeInMillis);
         LOGGER.error("handleUncaughtException - " + resolveMessage + "[Ticket: " + timeInMillis + "]", ex);
         return map;
     }
